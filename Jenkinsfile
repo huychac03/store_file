@@ -3,6 +3,10 @@ pipeline {
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
+    environment {
+        DOCKERHUB_USERNAME = credentials('dockerhub2').username
+        DOCKERHUB_PASSWORD = credentials('dockerhub2').password
+    }
     stages {
         stage('Build') {
             steps {
@@ -11,7 +15,7 @@ pipeline {
         }
         stage('Login') {
             steps {
-                sh 'docker login -u huychac03 -p huychac123'
+                sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
             }
         }
         stage('Push') {
