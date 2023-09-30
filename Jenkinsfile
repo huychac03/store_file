@@ -15,7 +15,16 @@ pipeline {
         }
         stage('Login') {
             steps {
-                sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
+                script {
+                    // Use the 'dockerhub2' credentials to log in
+                    withCredentials([usernamePassword(
+                        credentialsId: 'dockerhub2',
+                        usernameVariable: 'DOCKERHUB_USERNAME',
+                        passwordVariable: 'DOCKERHUB_PASSWORD'
+                    )]) {
+                        sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
+                    }
+                }               
             }
         }
         stage('Push') {
