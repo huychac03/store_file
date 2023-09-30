@@ -3,10 +3,6 @@ pipeline {
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
-    environment {
-        DOCKERHUB_USERNAME = credentials('dockerhub2').username
-        DOCKERHUB_PASSWORD = credentials('dockerhub2').password
-    }
     stages {
         stage('Build') {
             steps {
