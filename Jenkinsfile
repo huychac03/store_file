@@ -15,7 +15,8 @@ pipeline {
         }
         stage('Login') {
             steps {
-                sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
+                // sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
+                sh 'docker login -u huychac03 -p huychac123'
             }
         }
         stage('Push') {
