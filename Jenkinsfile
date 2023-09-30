@@ -4,12 +4,12 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
     environment {
-        DOCKERHUB_CREDENTIAL_ID = credentials('dockerhub')
+        DOCKERHUB_CREDENTIAL_ID = credentials('dockerhub-pass')
     }
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t huychac03/nginx-jenkins:1.0.0.0 .'
+                sh 'docker build -t huychac03/nginx-jenkins:1.0.0.1 .'
             }
         }
         stage('Login') {
@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Push') {
             steps {
-                sh 'docker push huychac03/nginx-jenkins:1.0.0.0'
+                sh 'docker push huychac03/nginx-jenkins:1.0.0.1'
             }
         }
     }
