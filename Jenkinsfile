@@ -4,7 +4,7 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
     environment {
-        DOCKER_CREDENTIALS = credentials('dockerhub')
+        DOCKERHUB_CREDENTIAL_ID = credentials('dockerhub')
     }
     stages {
         stage('Build') {
@@ -14,7 +14,9 @@ pipeline {
         }
         stage('Login') {
             steps {
-                sh 'docker login -u huychac03 -p huychac123'
+                withDockerRegistry([credentialsId: DOCKERHUB_CREDENTIAL_ID, url: "https://index.docker.io/v1/"]){
+                    
+                }
             }
         }
         stage('Push') {
