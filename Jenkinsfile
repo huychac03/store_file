@@ -14,8 +14,8 @@ pipeline {
         }
         stage('Login') {
             steps {
-                withDockerRegistry([credentialsId: DOCKERHUB_CREDENTIAL_ID, url: "https://index.docker.io/v1/"]){
-                    
+                withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIAL_ID, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh 'docker login -u $USERNAME -p $PASSWORD'
                 }
             }
         }
