@@ -7,9 +7,9 @@ pipeline {
         CONTAINER_REPOSITORY= "huychac03"
         APPLICATION_NAME= "nginx-jenkins"
 
-        CONTAINER_REGISTRY= "docker.io"
-        CONTAINER_REGISTRY_USER= credentials('CONTAINER_REGISTRY_USER')
-        CONTAINER_REGISTRY_PASSWORD= credentials('CONTAINER_REGISTRY_PASSWORD')
+        // CONTAINER_REGISTRY= "docker.io"
+        // CONTAINER_REGISTRY_USER= credentials('CONTAINER_REGISTRY_USER')
+        // CONTAINER_REGISTRY_PASSWORD= credentials('CONTAINER_REGISTRY_PASSWORD')
         
 
     }
@@ -24,15 +24,12 @@ pipeline {
             steps {
                 script {
                     // Use the 'dockerhub2' credentials to log in
-                    // withCredentials([usernamePassword(
-                    //     credentialsId: 'dockerhub',
-                    //     usernameVariable: 'DOCKERHUB_USERNAME',
-                    //     passwordVariable: 'DOCKERHUB_PASSWORD'
-                    // )]) {
-                    //     sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
-                    // }
-                    withDockerRegistry([credentialsId: "CONTAINER_REGISTRY", url: ""]) {
-                        sh 'docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}'
+                    withCredentials([usernamePassword(
+                        credentialsId: 'dockerhub',
+                        usernameVariable: 'DOCKERHUB_USERNAME',
+                        passwordVariable: 'DOCKERHUB_PASSWORD'
+                    )]) {
+                        sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
                     }
 
                 }               
