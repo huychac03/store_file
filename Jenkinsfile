@@ -14,7 +14,7 @@ pipeline {
                 script {
                     // Use the 'dockerhub2' credentials to log in
                     withCredentials([usernamePassword(
-                        credentialsId: 'dockerhub2',
+                        credentialsId: 'dockerhub',
                         usernameVariable: 'DOCKERHUB_USERNAME',
                         passwordVariable: 'DOCKERHUB_PASSWORD'
                     )]) {
