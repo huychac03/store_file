@@ -6,11 +6,11 @@ pipeline {
     environment {
         CONTAINER_REPOSITORY= "huychac03"
         APPLICATION_NAME= "nginx-jenkins"
-        withCredentials([usernamePassword(
-            credentialsId: 'dockerhub',
-            usernameVariable: 'DOCKERHUB_USERNAME',
-            passwordVariable: 'DOCKERHUB_PASSWORD'
-        )])
+
+        DOCKERHUB_USERNAME = credentials('dockerhub').username
+        DOCKERHUB_PASSWORD = credentials('dockerhub').password
+        
+
     }
 
     stages {
