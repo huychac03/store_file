@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t ${CONTAINER_REPOSITORY}/${APPLICATION_NAME}:1.0.0.3 .'
+                sh 'docker build -t ${CONTAINER_REPOSITORY}/${APPLICATION_NAME}:1.0.0.4 .'
             }
         }
         stage('Login') {
@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Push') {
             steps {
-                sh 'docker push ${CONTAINER_REPOSITORY}/${APPLICATION_NAME}:1.0.0.3'
+                sh 'docker push ${CONTAINER_REPOSITORY}/${APPLICATION_NAME}:1.0.0.4'
             }
         }
     }
