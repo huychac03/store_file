@@ -6,6 +6,11 @@ pipeline {
     environment {
         CONTAINER_REPOSITORY= "huychac03"
         APPLICATION_NAME= "nginx-jenkins"
+        withCredentials([usernamePassword(
+            credentialsId: 'dockerhub',
+            usernameVariable: 'DOCKERHUB_USERNAME',
+            passwordVariable: 'DOCKERHUB_PASSWORD'
+        )])
     }
 
     stages {
@@ -18,13 +23,14 @@ pipeline {
             steps {
                 script {
                     // Use the 'dockerhub2' credentials to log in
-                    withCredentials([usernamePassword(
-                        credentialsId: 'dockerhub',
-                        usernameVariable: 'DOCKERHUB_USERNAME',
-                        passwordVariable: 'DOCKERHUB_PASSWORD'
-                    )]) {
-                        sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
-                    }
+                    // withCredentials([usernamePassword(
+                    //     credentialsId: 'dockerhub',
+                    //     usernameVariable: 'DOCKERHUB_USERNAME',
+                    //     passwordVariable: 'DOCKERHUB_PASSWORD'
+                    // )]) {
+                    //     sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
+                    // }
+                    sh 'docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}'
                 }               
             }
         }
