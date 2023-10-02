@@ -18,7 +18,9 @@ pipeline {
         stage('Build') {
             steps {
                 script {                
-                    GIT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%s'").trim()                
+                    // GIT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%s'").trim()
+                    GIT_COMMIT = git log -n 1 --pretty=format:'%s'
+
                 }
                 sh 'docker build -t ${CONTAINER_REPOSITORY}/${APPLICATION_NAME}:${GIT_COMMIT} .'
             }
