@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t huychac03/nginx-jenkins:1.0.0.1 .'
+                sh 'docker build -t huychac03/nginx-jenkins:1.0.0.2 .'
             }
         }
         stage('Login') {
@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Push') {
             steps {
-                sh 'docker push huychac03/nginx-jenkins:1.0.0.1'
+                sh 'docker push huychac03/nginx-jenkins:1.0.0.2'
             }
         }
     }
