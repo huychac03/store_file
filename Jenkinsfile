@@ -7,7 +7,7 @@ pipeline {
         CONTAINER_REPOSITORY= "huychac03"
         APPLICATION_NAME= "nginx-jenkins"
 
-        CONTAINER_REGISTRY= 'dockerhub'
+        CONTAINER_REGISTRY= "docker.io"
         CONTAINER_REGISTRY_USER= credentials('CONTAINER_REGISTRY_USER')
         CONTAINER_REGISTRY_PASSWORD= credentials('CONTAINER_REGISTRY_PASSWORD')
         
