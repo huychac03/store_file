@@ -17,7 +17,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t ${CONTAINER_REPOSITORY}/${APPLICATION_NAME}:1.0.0.4 .'
+                script {                
+                    GIT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()                
+                }
+                sh 'docker build -t ${CONTAINER_REPOSITORY}/${APPLICATION_NAME}:${GIT_COMMIT} .'
             }
         }
         stage('Login') {
@@ -37,7 +40,7 @@ pipeline {
         }
         stage('Push') {
             steps {
-                sh 'docker push ${CONTAINER_REPOSITORY}/${APPLICATION_NAME}:1.0.0.4'
+                sh 'docker push ${CONTAINER_REPOSITORY}/${APPLICATION_NAME}:${GIT_COMMIT}'
             }
         }
     }
