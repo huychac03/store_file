@@ -3,10 +3,15 @@ pipeline {
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
+    environment {
+        CONTAINER_REPOSITORY= "huychac03"
+        APPLICATION_NAME= "nginx-jenkins"
+    }
+
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t huychac03/nginx-jenkins:1.0.0.2 .'
+                sh 'docker build -t ${CONTAINER_REPOSITORY}/${APPLICATION_NAME}:1.0.0.3 .'
             }
         }
         stage('Login') {
@@ -25,7 +30,7 @@ pipeline {
         }
         stage('Push') {
             steps {
-                sh 'docker push huychac03/nginx-jenkins:1.0.0.2'
+                sh 'docker push ${CONTAINER_REPOSITORY}/${APPLICATION_NAME}:1.0.0.3'
             }
         }
     }
